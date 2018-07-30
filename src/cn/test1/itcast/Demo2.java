@@ -29,6 +29,34 @@ public class Demo2 {
 		}
 		show (ints);
 
+		//第一种方式
+		/*jh:
+		for (int x = 0; x < ints.length; x++) {
+			for (int y = x + 1; y < ints.length; y++) {
+				if (ints[x] == ints[y]) {
+					System.out.println ("重复的元素是--->" + ints[x]);
+					break;
+				}
+			}
+		}*/
+		//采用加法计算
+		/*int sum=0;
+		for (int i = 0; i < ints.length; i++) {
+			sum+=ints[i];
+		}
+		for (int i = 0; i < 100; i++) {
+			sum-=i;
+		}
+		System.out.println ("重复的元素是--->" + sum);*/
+		//采用异或计算
+		for (int i = 1; i < ints.length; i++) {
+			ints[0] ^= ints[i];
+		}
+		for (int i = 0; i < 100; i++) {
+			ints[0]^=i;
+		}
+
+		System.out.println ("---------->"+ints[0]);
 	}
 
 	public static void show(int[] ints) {
