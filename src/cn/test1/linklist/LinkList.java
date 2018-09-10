@@ -4,6 +4,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.logging.Level;
 
 /**
  * cn.test1.linklist
@@ -121,25 +122,50 @@ public class LinkList {
 			tmp = tmp.next;
 		}
 	}
+
 	public void deleteDuplecate1(Node head) {
 		/*
 		采用双层循环遍历，外循环正常遍历链表，假设外循环当前结点为cur，内循环就从cur开始遍历，若碰到与cur所指结点相同的值，则删除这个重复结点。
 		 */
 		Node p = head;
-		while (p!=null){
-			Node q=p;
-			while (q.next!=null){
+		while (p != null) {
+			Node q = p;
+			while (q.next != null) {
 				//若当前值与下一个值的data相等
-				if(p.data==q.next.data){
+				if (p.data == q.next.data) {
 					//跳过下一次的值
-					q.next=q.next.next;
-				}else {
+					q.next = q.next.next;
+				} else {
 					//不相等继续向下遍历
-					q=q.next;
+					q = q.next;
 				}
 			}
-			p=p.next;
+			p = p.next;
 		}
+	}
+
+	/**
+	 * 查找链表中倒数第K个元素
+	 * 思想：就是说两个指针，第一个从当前位置开始，第二个指针比第一个快（k-1），所以当第二个等于Null时，则到链表的尾部，则第一个指针的位置就是K元素
+	 */
+	public Node findElem(Node head, int k) {
+		if (k < 1) {
+			return null;
+		}
+		Node p1 = head;
+		Node p2 = head;
+		for (int i = 0; i < (k - 1) && p1 != null; i++) {
+			p1=p1.next;
+		}
+		if(p1==null){
+			System.out.println ("p not saft");
+			return null;
+		}
+		while (p1.next!=null){
+			p1=p1.next;
+			p2=p2.next;
+		}
+		return p2;
 	}
 
 	public static void main(String[] args) {
@@ -148,11 +174,13 @@ public class LinkList {
 		linkList.adddNode (1);
 		linkList.adddNode (5);
 		linkList.adddNode (5);
-		linkList.adddNode (5);
-		linkList.adddNode (5);
 		linkList.adddNode (3);
+		linkList.adddNode (6);
+		linkList.adddNode (9);
 		//linkList.deleteNode (1);
-		linkList.deleteDuplecate1 (linkList.head);
+		//linkList.deleteDuplecate1 (linkList.head);
+		Node elem = linkList.findElem (linkList.head,3);
+		System.out.println (elem.data);
 		System.out.println ("length---->" + linkList.length ());
 		linkList.printList ();
 
