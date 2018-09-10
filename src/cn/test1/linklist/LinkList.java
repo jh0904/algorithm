@@ -155,32 +155,57 @@ public class LinkList {
 		Node p1 = head;
 		Node p2 = head;
 		for (int i = 0; i < (k - 1) && p1 != null; i++) {
-			p1=p1.next;
+			p1 = p1.next;
 		}
-		if(p1==null){
+		if (p1 == null) {
 			System.out.println ("p not saft");
 			return null;
 		}
-		while (p1.next!=null){
-			p1=p1.next;
-			p2=p2.next;
+		while (p1.next != null) {
+			p1 = p1.next;
+			p2 = p2.next;
 		}
 		return p2;
 	}
 
+	/**
+	 * 从尾到头输出链表
+	 */
+	public void printListR(Node head) {
+		if (head != null) {
+			printListR (head.next);
+			System.out.println (head.data);
+		}
+	}
+
+	/**
+	 * 寻找单链表的中间结点。
+	 * 思路：两个指针，a指针每次走一步，b指针每次走2步。（当链表长度为奇数时，a指针指的就是中间节点，偶数时，指向的正是中间结点的前一个节点。）
+	 * */
+	public Node SearchMid(Node head){
+		Node p = this.head;
+		Node q = this.head;
+		while(p!=null&&p.next!=null&&p.next.next!=null){
+			p=p.next.next;
+			q=q.next;
+		}
+		return q;
+	}
 	public static void main(String[] args) {
 		LinkList linkList = new LinkList ();
 		linkList.adddNode (3);
 		linkList.adddNode (1);
-		linkList.adddNode (5);
+		linkList.adddNode (4);
 		linkList.adddNode (5);
 		linkList.adddNode (3);
 		linkList.adddNode (6);
 		linkList.adddNode (9);
 		//linkList.deleteNode (1);
 		//linkList.deleteDuplecate1 (linkList.head);
-		Node elem = linkList.findElem (linkList.head,3);
-		System.out.println (elem.data);
+		//Node elem = linkList.findElem (linkList.head, 3);
+		//System.out.println (elem.data);
+		//linkList.printListR (linkList.head);
+		System.out.println (linkList.SearchMid (linkList.head).data);
 		System.out.println ("length---->" + linkList.length ());
 		linkList.printList ();
 
