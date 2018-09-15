@@ -1,4 +1,4 @@
-package cn.test1.c2_sort;
+package cn.test1.topic;
 
 /**
  * cn.test1.c2_sort
